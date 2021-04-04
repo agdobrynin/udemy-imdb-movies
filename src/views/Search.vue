@@ -6,15 +6,16 @@
           <p>Type part of movie name and press <strong>"Enter"</strong>
             key or click on <strong>"Search"</strong> button for start search</p>
           <b-form inline @submit.prevent="doSearch">
-            <b-form-input v-model="queryString" debounce="500" placeholder="Enter movie name"/>
-            <b-button type="submit" variant="primary" class="ml-2">Search</b-button>
+            <b-form-input ref="queryString" v-model="queryString" placeholder="Enter movie name" :readonly="movies.length > 0"/>
+            <b-button type="submit" variant="primary" class="ml-2" :disabled="movies.length > 0">Search</b-button>
+            <b-button class="ml-2" v-if="movies.length > 0" @click="newSearch">New search</b-button>
           </b-form>
         </b-col>
       </b-row>
     </b-container>
     <b-container class="pt-5">
       <b-row v-if="total" cols-xl="4" cols-lg="3" cols-md="2" cols-sm="1" align-h="center">
-        <b-col v-for="movie in movies" :key="movie.id" class="d-flex align-items-stretch">
+        <b-col v-for="(movie, i) in movies" :key="`${movie.id}_${i}`" class="d-flex align-items-stretch">
           <movie-card
             :movie="movie"
             actionTitle="❤"
@@ -62,6 +63,7 @@ export default class Search extends Vue {
   private currentMovie: MovieShortInfo | null = null
 
   private readonly movies!: MovieShortInfo[]
+  private page!: number
   private readonly total!: number
   private readonly favoritesId!: string[]
 
@@ -98,17 +100,13 @@ export default class Search extends Vue {
     this.currentMovie = movie
   }
 
-  @Watch('queryString')
-  doChangeQueryString (): void {
-    this.resetMovies()
-  }
-
   @Watch('page')
   async doSearch (): Promise<void> {
     try {
       if (!this.queryString) {
-        throw Error('Please enter correct query string')
+        return
       }
+
       this.startProgress()
       await this.fetchData(this.queryString)
     } catch (e) {
@@ -118,7 +116,18 @@ export default class Search extends Vue {
     }
   }
 
+  newSearch (): void {
+    this.queryString = ''
+    this.resetMovies()
+    const input = this.$refs.queryString as HTMLInputElement
+    input.focus()
+  }
+
   created (): void {
+    this.resetMovies()
+  }
+
+  unmounted () : void {
     this.resetMovies()
   }
 }
