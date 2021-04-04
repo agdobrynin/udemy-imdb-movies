@@ -4,8 +4,8 @@
       <b-col>
         <p>Simple <strong>SPA</strong> application with VueJs + Vuex + VueRouter and Typescript.</p>
         <p>
-          You can  <router-link :to="{name: 'Search'}">Search in IMDB</router-link> by movie name, and found movies
-          add to <router-link :to="{name: 'Top'}">My top</router-link> store.
+          You can  <router-link :to="{name: 'Search'}">Search in IMDB</router-link> by movie name,
+          add to <router-link :to="{name: 'Top'}">My top</router-link> movies.
         </p>
       </b-col>
     </b-row>
