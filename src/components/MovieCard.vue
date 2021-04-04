@@ -1,5 +1,5 @@
 <template>
-  <b-card class="mb-5" :imgSrc="movie.imgSrc">
+  <b-card class="mb-5" :imgSrc="getImg(movie.imgSrc)">
     <b-card-text class="d-flex justify-content-between">
       <h5>{{movie.title}} <b-badge variant="info">{{movie.year}}</b-badge></h5>
     </b-card-text>
@@ -25,13 +25,17 @@ export default class MovieCard extends Vue {
   @Prop({ default: 'Some action' }) readonly actionTitle!: string
 
   @Emit()
-  emitActionMovie (movie: MovieShortInfo) {
+  emitActionMovie (movie: MovieShortInfo): MovieShortInfo {
     return movie
   }
 
   @Emit()
-  emitDescriptionMovie (movie: MovieShortInfo) {
+  emitDescriptionMovie (movie: MovieShortInfo): MovieShortInfo {
     return movie
+  }
+
+  getImg (imgUrl: string): string {
+    return imgUrl || require('../assets/logo.png')
   }
 }
 </script>

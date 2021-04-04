@@ -13,7 +13,7 @@ export default class MovieShortInfo {
     this._imgSrc = response.Poster
   }
 
-  get imgSrc () {
+  get imgSrc (): string {
     return this._imgSrc !== 'N/A' ? this._imgSrc : ''
   }
 }
