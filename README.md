@@ -1,5 +1,9 @@
 # imdb-movies
 
+Simple SPA application with VueJs + Vuex + VueRouter and Typescript.
+
+You can Search in IMDB by movie name, add to My top movies.
+
 ## Project setup
 ```
 npm install
