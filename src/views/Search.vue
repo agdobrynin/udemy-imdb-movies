@@ -53,8 +53,8 @@ import MovieInfo from '@/components/MovieInfo.vue'
   methods: {
     ...mapMutations(['startProgress', 'stopProgress', 'setNotification']),
     ...mapActions('searchMovies', ['fetchData']),
-    ...mapMutations('searchMovies', ['resetMovies', 'setPage']),
-    ...mapMutations('topMovies', ['addMovie'])
+    ...mapActions('topMovies', ['addToFavorites']),
+    ...mapMutations('searchMovies', ['resetMovies', 'setPage'])
   }
 })
 export default class Search extends Vue {
@@ -71,7 +71,7 @@ export default class Search extends Vue {
   fetchData!: (queryString: string) => Promise<void>
   resetMovies!: () => void
   setPage!: (page: number) => void
-  addMovie!: (movie: MovieShortInfo) => void
+  addToFavorites!: (movie: MovieShortInfo) => void
 
   onPageChanged (page: number): void {
     this.setPage(page)
@@ -85,7 +85,7 @@ export default class Search extends Vue {
       return
     }
 
-    this.addMovie(movie)
+    this.addToFavorites(movie)
     const message = `The movie "${movie.title}" add to your favorite`
     this.setNotification({ message, variant: 'success', title })
   }
@@ -94,12 +94,12 @@ export default class Search extends Vue {
     this.currentMovie = null
   }
 
-  onDescriptionMovie (movie: MovieShortInfo) {
+  onDescriptionMovie (movie: MovieShortInfo): void {
     this.currentMovie = movie
   }
 
   @Watch('queryString')
-  doChangeQueryString () {
+  doChangeQueryString (): void {
     this.resetMovies()
   }
 
@@ -118,7 +118,7 @@ export default class Search extends Vue {
     }
   }
 
-  created () {
+  created (): void {
     this.resetMovies()
   }
 }

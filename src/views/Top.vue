@@ -47,9 +47,9 @@ import { notificationItem } from '@/store/types'
     ...mapState('topMovies', ['page', 'perPage'])
   },
   methods: {
-    ...mapMutations('topMovies', ['setPage', 'deleteMovie']),
+    ...mapMutations('topMovies', ['setPage']),
     ...mapMutations(['startProgress', 'stopProgress', 'setNotification']),
-    ...mapActions('topMovies', ['fetchData'])
+    ...mapActions('topMovies', ['fetchData', 'removeFromFavorites'])
   }
 })
 export default class Top extends Vue {
@@ -63,7 +63,7 @@ export default class Top extends Vue {
   stopProgress!: () => void
   setNotification!: (item: notificationItem) => void
   setPage!: (page: number) => void
-  deleteMovie!: (movie: MovieShortInfo) => void
+  removeFromFavorites!: (movie: MovieShortInfo) => void
 
   constructor () {
     super()
@@ -88,7 +88,7 @@ export default class Top extends Vue {
   async onDeleteAction (movie: MovieShortInfo): Promise<void> {
     const confirmText = `Are you sure delete from favorites "${movie.title}"`
     if (await this.$bvModal.msgBoxConfirm(confirmText, { title: 'Confirm delete' })) {
-      this.deleteMovie(movie)
+      this.removeFromFavorites(movie)
       await this.updatePage()
       if (this.movies.length === 0) {
         this.onPageChanged(this.page - 1)

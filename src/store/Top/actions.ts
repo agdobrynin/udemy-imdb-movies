@@ -2,6 +2,7 @@ import { ActionTree } from 'vuex'
 import { getMovieById } from '@/services/api'
 import { RootState, TopMoviesStore } from '@/store/types'
 import MovieShortInfo from '@/models/MovieShortInfo'
+import { storeFavoritesId } from '@/store/Top/index'
 
 export const actions: ActionTree<TopMoviesStore, RootState> = {
   async fetchData ({ commit, getters }): Promise<void> {
@@ -13,5 +14,15 @@ export const actions: ActionTree<TopMoviesStore, RootState> = {
       return acc
     }, [])
     commit('setMovies', movies)
+  },
+
+  addToFavorites ({ commit, state }, movie: MovieShortInfo): void {
+    commit('addMovie', movie)
+    storeFavoritesId(state)
+  },
+
+  removeFromFavorites ({ commit, state }, movie: MovieShortInfo): void {
+    commit('deleteMovie', movie)
+    storeFavoritesId(state)
   }
 }

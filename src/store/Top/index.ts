@@ -4,13 +4,23 @@ import { getters } from '@/store/Top/getters'
 import { mutations } from '@/store/Top/mutations'
 import { actions } from '@/store/Top/actions'
 
+export const LOCALSTORAGE_KEY = 'app-imdb-movies-favorites'
+
+export const storeFavoritesId = (state: TopMoviesStore): void => {
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(state.favoritesId))
+}
+
+const restoreFavoritesId = (): string [] => {
+  const storedFavoritesId = localStorage.getItem(LOCALSTORAGE_KEY)
+  if (storedFavoritesId) {
+    return JSON.parse(storedFavoritesId)
+  }
+
+  return []
+}
+
 export const state: TopMoviesStore = {
-  favoritesId: [
-    'tt0407362',
-    'tt0991178',
-    'tt1286130',
-    'tt1704292'
-  ],
+  favoritesId: restoreFavoritesId(),
   page: 1,
   perPage: 8,
   movies: []
