@@ -15,6 +15,7 @@ export const actions: ActionTree<SearchMovies, RootState> = {
 
       return acc
     }, [])
+
     commit('addMovies', movies)
   }
 }

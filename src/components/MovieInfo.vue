@@ -78,6 +78,7 @@ import { getMovieById, TypePlot } from '@/services/api'
 })
 export default class MovieCard extends Vue {
   @Prop() readonly movie!: MovieShortInfo
+
   movieFullInfo !: MovieFillInfo
   show = false
   onProgress = true

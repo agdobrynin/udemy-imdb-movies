@@ -75,6 +75,11 @@ export default class Search extends Vue {
   setPage!: (page: number) => void
   addToFavorites!: (movie: MovieShortInfo) => void
 
+  constructor () {
+    super()
+    this.resetMovies()
+  }
+
   onPageChanged (page: number): void {
     this.setPage(page)
   }
@@ -121,14 +126,6 @@ export default class Search extends Vue {
     this.resetMovies()
     const input = this.$refs.queryString as HTMLInputElement
     input.focus()
-  }
-
-  created (): void {
-    this.resetMovies()
-  }
-
-  unmounted () : void {
-    this.resetMovies()
   }
 }
 </script>

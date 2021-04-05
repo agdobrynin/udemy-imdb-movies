@@ -11,5 +11,4 @@ export interface MovieFullInfoResponseInterface extends MovieShortInfoResponseIn
   Director: string;
   Writer: string;
   Actors: string;
-
 }

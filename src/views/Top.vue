@@ -43,8 +43,8 @@ import { notificationItem } from '@/store/types'
     MovieInfo
   },
   computed: {
-    ...mapGetters('topMovies', ['movies', 'total']),
-    ...mapState('topMovies', ['page', 'perPage'])
+    ...mapGetters('topMovies', ['total']),
+    ...mapState('topMovies', ['page', 'perPage', 'movies'])
   },
   methods: {
     ...mapMutations('topMovies', ['setPage']),
