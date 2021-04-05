@@ -4,16 +4,16 @@ export default class MovieShortInfo {
   public readonly id: string
   public readonly title: string
   public readonly year: string
-  private readonly _imgSrc: string
+  private readonly _posterImage: string
 
   constructor (response: MovieShortInfoResponseInterface) {
     this.id = response.imdbID
     this.title = response.Title
     this.year = response.Year
-    this._imgSrc = response.Poster
+    this._posterImage = response.Poster
   }
 
-  get imgSrc (): string {
-    return this._imgSrc !== 'N/A' ? this._imgSrc : ''
+  get posterImage (): string {
+    return this._posterImage !== 'N/A' ? this._posterImage : require('../assets/logo.png')
   }
 }

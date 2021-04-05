@@ -3,7 +3,7 @@
     <b-card border-variant="light">
       <b-row>
         <b-col md="12" lg="6">
-          <b-card-img :src="movie.imgSrc" alt="Image" class="rounded-0"></b-card-img>
+          <b-card-img :src="movie.posterImage" alt="Image" class="rounded-0"></b-card-img>
         </b-col>
         <b-col md="12" lg="6">
           <b-card-body :title="movie.title" class="fix-description">
