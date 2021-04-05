@@ -8,6 +8,9 @@ You can Search in IMDB by movie name, add to My top movies.
 ```
 npm install
 ```
+Get API key from http://www.omdbapi.com
+
+Add your API key to `.env`
 
 ### Compiles and hot-reloads for development
 ```
