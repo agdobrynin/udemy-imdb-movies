@@ -29,7 +29,7 @@
       </b-row>
       <b-row v-if="total">
         <b-col>
-          <b-pagination :total-rows="total" @change="onPageChanged" :value="page" :per-page="perPage" align="fill"></b-pagination>
+          <b-pagination limit="10" :total-rows="total" @change="onPageChanged" :value="page" :per-page="perPage" align="fill"></b-pagination>
         </b-col>
       </b-row>
     </b-container>
